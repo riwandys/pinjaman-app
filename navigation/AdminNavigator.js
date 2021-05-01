@@ -13,7 +13,7 @@ const AdminNavigator = createStackNavigator({
     AcceptApplication: AcceptApplicationScreen,
     RejectApplicationAndPayment: RejectApplicationAndPaymentScreen,
     PaymentDetail: PaymentDetailScreen,
-
+    AdminTransactionHistory: AdminTransactionHistoryScreen
 });
 
 export default createAppContainer(AdminNavigator);
