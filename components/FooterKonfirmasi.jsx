@@ -1,12 +1,10 @@
 import React from 'react'
-import {StyleSheet, View, Text } from 'react-native'
+import {StyleSheet, View} from 'react-native'
 
-export default function HeaderRegister(){
+export default function FooterRegister(){
     return (
         <View style={styles.container}>
-            <Text>
-                <Button title = "<"></Button> Register
-            </Text>
+            <Button title="Konfirmasi"></Button>
         </View>
     )
 }
@@ -16,6 +14,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#F49135',
         width: '100%',
         height: 47,
-        marginBottom: 100
+        marginTop: 100
     }
 });

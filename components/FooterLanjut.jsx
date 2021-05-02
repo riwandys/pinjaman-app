@@ -1,19 +1,19 @@
 import React from 'react'
-import {StyleSheet, View, Text } from 'react-native'
+import {StyleSheet, View} from 'react-native'
 
-export default function Footer(){
-    return(
-        <View style={style.container}>
+export default function FooterRegister(){
+    return (
+        <View style={styles.container}>
             <Button title="Lanjut"></Button>
         </View>
     )
 }
 
-const styles = StyleSheet.create(){
+const styles = StyleSheet.create({
     container: {
         backgroundColor: '#F49135',
         width: '100%',
         height: 47,
         marginTop: 100
     }
-}
+});
