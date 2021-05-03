@@ -30,6 +30,9 @@ export default function AccountScreen(){
             <View style={styles.button}>
                 <Button title="Pinjam Sekarang"></Button>
             </View>
+            <View style={styles.menu}>
+
+            </View>
         </View>
     )
 }
@@ -40,5 +43,6 @@ const styles = StyleSheet.create({
     text2: {},
     limit: {},
     nominal: {},
-    button: {}
+    button: {},
+    menu: {}
 })
