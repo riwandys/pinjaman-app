@@ -1,35 +1,40 @@
-import React from 'react'
-import { Text, View, TextInput, Button, SafeAreaView } from 'react-native'
+import React from 'react-native'
+import { View, Text, Button } from 'react-native'
 
 export default function AccountScreen(){
     return (
-        <View>
-            <View style={styles.container}>
-                <Text style={styles.text1}>
-                    Halo!
+        <View style={styles.header}>
+            <Text>
+            Akun
+                <Button title="<"></Button>
+            </Text>
+            <View style={styles.profile}>
+                <Text style={styles.name}>
                     Nama Pengguna
                 </Text>
-                <Text style={styles.text2}>
-                    DD/MM/YY
+                <Text>
+                    ID Pengguna
                 </Text>
+                <Separator />
+                <Button title="Ajukan Kenaikan Limit"></Button>
             </View>
-            <View style={styles.limit}>
-                <Text style={styles.textlimit}>
-                    Limit Pinjam
-                    <Text style={styles.nominal}>
-                        Rp.XXX.XXX
-                    </Text>
-                </Text>
-                <Text style={styles.textlimit}>
-                    Sisa Limit
-                    <Text style={styles.nominal}>
-                        Rp.XXX.XXX
-                    </Text>
-                </Text>
+            <View style={styles.setting}>
+                <Button title="Ganti Password"></Button>
+                <Separator />
+                <Button title="FAQ"></Button>
+                <Separator />
+                <Button title="Tentang Kami"></Button>
             </View>
-            <View style={styles.button}>
-                <Button title="Pinjam Sekarang"></Button>
-            </View>
+            <Button title="Keluar"></Button>
+            <View style={styles.menu}></View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    header: {},
+    profile: {},
+    name: {},
+    setting: {},
+    menu: {},
+})
