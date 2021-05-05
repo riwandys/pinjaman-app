@@ -1,6 +1,7 @@
 import React from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView } from 'react-native'
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native'
 import AdminDataItems from '../components/AdminDataItems'
+import MasterAdminBottomTabs from '../components/MasterAdminBottomTabs'
 
 export default function MasterAdminHomeScreen() {
     return (
@@ -25,17 +26,27 @@ export default function MasterAdminHomeScreen() {
                     <Text style={styles.dataAmount}>141</Text>
                 </View>
             </View>
-            <ScrollView style={styles.adminListContainer}>
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
-                <AdminDataItems />
+            <ScrollView>
+                <View style={styles.adminListContainer}>
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                    <AdminDataItems />
+                </View>
             </ScrollView>
+            <View style={styles.buttonContainer}>
+                <TouchableNativeFeedback useForeground={true}>
+                    <View style={styles.addButton}>
+                        <Text style={styles.buttonText}>Tambah Admin</Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+            <MasterAdminBottomTabs />
         </SafeAreaView>
     );
 }
@@ -84,6 +95,24 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     adminListContainer: {
-        padding: 16
+        paddingHorizontal: 16
+    },
+    buttonContainer: {
+        paddingHorizontal: 16,
+        paddingBottom: 12
+    },
+    addButton: {
+        width: '100%',
+        height: 48,
+        backgroundColor: '#F49135',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+        overflow: 'hidden'
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 12,
+        fontWeight: 'bold'
     }
 });

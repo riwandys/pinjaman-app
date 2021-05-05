@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         borderColor: 'orange',
         borderWidth: 1,
-        marginBottom: 18
+        marginBottom: 14
     },
     dataContainer: {
         height: 99,
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderLeftColor: 'orange',
-        borderLeftWidth: 1,
+        borderLeftWidth: 1
     }
 });
