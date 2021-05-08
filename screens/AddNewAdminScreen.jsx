@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar, SafeAreaView, ScrollView, TextInput,
 import Header from '../components/Header';
 import BackIcon from '../assets/back_icon.svg'
 import color from '../constants/color';
+import StickButton from '../components/StickButton';
 
 const AddNewAdminScreen = () => {
     return (
@@ -13,11 +14,7 @@ const AddNewAdminScreen = () => {
                 <TextInput style={styles.textInput} placeholder="Password" secureTextEntry keyboardType='default' />
             </ScrollView>
             <KeyboardAvoidingView behavior='height'>
-                <TouchableNativeFeedback>
-                    <View style={styles.bottomButton}>
-                        <Text style={styles.buttonText}>Tambah</Text>
-                    </View>
-                </TouchableNativeFeedback>
+                <StickButton text="Tambah" />
             </KeyboardAvoidingView>
         </SafeAreaView >
     )
@@ -40,17 +37,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         borderColor: '#C1C1C1',
         borderWidth: 1
-    },
-    bottomButton: {
-        backgroundColor: color.primary,
-        height: 60,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 14,
-        fontWeight: 'bold'
     }
 })
