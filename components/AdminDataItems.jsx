@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import ArrowIcon from '../assets/arrow_drop_right.svg';
+import color from '../constants/color'
 
 export default function AdminDataItems() {
     return (
@@ -26,7 +27,7 @@ export default function AdminDataItems() {
 const styles = StyleSheet.create({
     border: {
         borderRadius: 6,
-        borderColor: 'orange',
+        borderColor: color.primary,
         borderWidth: 1,
         marginBottom: 14
     },
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         width: 52,
         alignItems: 'center',
         justifyContent: 'center',
-        borderLeftColor: 'orange',
+        borderLeftColor: color.primary,
         borderLeftWidth: 1
     }
 });

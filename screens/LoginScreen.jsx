@@ -2,11 +2,11 @@ import React from 'react'
 import { KeyboardAvoidingView, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableNativeFeedback, View } from 'react-native'
 import Header from '../components/Header';
 import Logo from '../assets/logo.svg';
+import color from '../constants/color'
 
 const LoginScreen = () => {
     return (
         <SafeAreaView>
-            <StatusBar backgroundColor="rgba(0,0,0,0.1)" translucent />
             <Header title="PinjaMAN" />
             <ScrollView style={styles.scrollContainer}>
                 <KeyboardAvoidingView behavior='position'>
@@ -22,7 +22,7 @@ const LoginScreen = () => {
                             </TouchableNativeFeedback>
                             <TouchableNativeFeedback useForeground={true}>
                                 <View style={{ ...styles.button, backgroundColor: 'white' }}>
-                                    <Text style={{ color: '#F49135' }}>DAFTAR</Text>
+                                    <Text style={{ color: color.primary }}>DAFTAR</Text>
                                 </View>
                             </TouchableNativeFeedback>
                         </View>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 34,
         paddingTop: 52,
         paddingBottom: 40,
-        backgroundColor: '#F49135',
+        backgroundColor: color.primary,
         width: 285,
         borderRadius: 20
     },

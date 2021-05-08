@@ -1,7 +1,8 @@
 import React from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native'
 import AdminDataItems from '../components/AdminDataItems'
-import MasterAdminBottomTabs from '../components/MasterAdminBottomTabs'
+import MasterAdminBottomTabs from '../components/MasterAdminBottomTabs';
+import color from '../constants/color'
 
 export default function MasterAdminHomeScreen() {
     return (
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     header: {
         height: StatusBar.currentHeight + 141,
         width: '100%',
-        backgroundColor: '#F49135',
+        backgroundColor: color.primary,
         paddingHorizontal: 16,
         paddingTop: StatusBar.currentHeight + 16,
         color: '#FFFFFF',
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     addButton: {
         width: '100%',
         height: 48,
-        backgroundColor: '#F49135',
+        backgroundColor: color.primary,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
