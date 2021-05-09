@@ -1,6 +1,7 @@
 import React from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native'
 import AdminDataItems from '../components/AdminDataItems'
+import BlockButton from '../components/BlockButton';
 import MasterAdminBottomTabs from '../components/MasterAdminBottomTabs';
 import color from '../constants/color'
 
@@ -41,11 +42,7 @@ export default function MasterAdminHomeScreen() {
                 </View>
             </ScrollView>
             <View style={styles.buttonContainer}>
-                <TouchableNativeFeedback useForeground={true}>
-                    <View style={styles.addButton}>
-                        <Text style={styles.buttonText}>Tambah Admin</Text>
-                    </View>
-                </TouchableNativeFeedback>
+                <BlockButton text="Tambah Admin" />
             </View>
             <MasterAdminBottomTabs />
         </SafeAreaView>
@@ -101,19 +98,5 @@ const styles = StyleSheet.create({
     buttonContainer: {
         paddingHorizontal: 16,
         paddingBottom: 12
-    },
-    addButton: {
-        width: '100%',
-        height: 48,
-        backgroundColor: color.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 6,
-        overflow: 'hidden'
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 12,
-        fontWeight: 'bold'
     }
 });
