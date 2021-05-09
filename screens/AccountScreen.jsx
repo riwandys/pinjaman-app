@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableNativeFeedba
 import Header from '../components/Header';
 import BackIcon from '../assets/back_icon.svg';
 import UserIcon from '../assets/user_circle.svg';
+import MasterAdminBottomTabs from '../components/MasterAdminBottomTabs';
+import BlockButton from '../components/BlockButton';
 
 const AccountScreen = () => {
     return (
@@ -29,6 +31,10 @@ const AccountScreen = () => {
                     </TouchableNativeFeedback>
                 </View>
             </ScrollView>
+            <View style={styles.buttonContainer}>
+                <BlockButton text="Keluar" />
+            </View>
+            <MasterAdminBottomTabs />
         </SafeAreaView >
     )
 }
@@ -63,5 +69,9 @@ const styles = StyleSheet.create({
         height: 48,
         paddingHorizontal: 16,
         justifyContent: 'center'
+    },
+    buttonContainer: {
+        paddingHorizontal: 16,
+        paddingBottom: 8
     }
 })
