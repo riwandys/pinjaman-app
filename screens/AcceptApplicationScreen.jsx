@@ -1,32 +1,58 @@
-import React from 'react'
-import { View, Button, Text, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, ScrollView, TextInput, KeyboardAvoidingView } from 'react-native';
+import Header from '../components/Header';
+import StickButton from '../components/StickButton';
+import BackIcon from '../assets/back_icon.svg';
+import color from '../constants/color';
 
-export default function AcceptApplicationScreen(){
-    return(
-        <View>
-            <View style={styles.header}>
-                <Text>
-                    Terima Pengajuan
-                    <Button title="<"></Button>
-                </Text>
-            </View>
-            <View style={style.container}>
-                <Text style={styles.text}>
-                    Tentukan Limit Pinjaman
-                </Text>
-                <TextInput style={styles.input}></TextInput>
-            </View>
-            <View styles={styles.footer}>
-                <Button title="Terima Pengajuan"></Button>
-            </View>
-        </View>
+const AcceptApplicationScreen = () => {
+    const [temp, setTemp] = useState(0);
+    const [limit, setLimit] = useState(0);
+    const inputHandler = (input) => {
+        setTemp(input);
+    }
+    return (
+        <SafeAreaView style={styles.container}>
+            <StatusBar backgroundColor="rgba(0,0,0,0.1)" translucent />
+            <Header title="Terima Pengajuan" leftIcon={BackIcon} />
+            <ScrollView>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>Tentukan Limit Pengajuan</Text>
+                </View>
+                <View style={styles.inputContainer}>
+                    <TextInput style={styles.input} textAlign='center' keyboardType='number-pad' placeholder='Rp 0' onChangeText={inputHandler} />
+                </View>
+            </ScrollView>
+            <KeyboardAvoidingView behavior='height'>
+                <StickButton text="Terima Pengajuan" />
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     )
 }
 
+export default AcceptApplicationScreen
+
 const styles = StyleSheet.create({
-    header: {},
-    container: {},
-    text: {},
-    input: {},
-    footer: {}
+    container: {
+        flex: 1
+    },
+    titleContainer: {
+        padding: 16,
+        alignItems: 'center'
+    },
+    title: {
+        fontWeight: 'bold'
+    },
+    inputContainer: {
+        paddingHorizontal: 16,
+        paddingVertical: 4
+    },
+    input: {
+        height: 85,
+        borderWidth: 1,
+        borderColor: color.primary,
+        borderRadius: 6,
+        fontSize: 24,
+        color: '#979797'
+    }
 })
