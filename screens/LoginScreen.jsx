@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableNativeFeedback, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/Header';
 import Logo from '../assets/logo.svg';
-import color from '../constants/color'
+import color from '../constants/color';
+import { loginAction } from '../redux/actions/auth';
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
     const [email, setEmail] = useState('');
     const [pin, setPIN] = useState('');
-    const formData = new FormData();
-
+    const dispatch = useDispatch();
+    const role = useSelector(state => state.auth.role);
     const emailInputHandler = (text) => {
         setEmail(text);
     }
+
+    useEffect(() => {
+        if (role === 'User') {
+            props.navigation.navigate('User');
+        } else if (role === 'Admin') {
+            props.navigation.navigate('Admin');
+        } else if (role === 'Master Admin') {
+            props.navigation.navigate('MasterAdmin')
+        }
+    }, [role]);
 
     const pinInputHandler = (text) => {
         setPIN(text);
@@ -21,7 +33,7 @@ const LoginScreen = () => {
         if (email === '' || pin === '') {
             alert('Email/PIN belum lengkap');
         } else {
-            alert(`Email yang anda masukkan : ${email}\nPassword anda : ${pin}`);
+            dispatch(loginAction(email, pin));
         }
     }
 
