@@ -6,13 +6,18 @@ import RejectApplicationAndPaymentScreen from '../screens/RejectApplicationAndPa
 import PaymentDetailScreen from '../screens/PaymentDetailScreen';
 import AdminTransactionHistoryScreen from '../screens/AdminTransactionHistoryScreen';
 
-const AdminNavigator = createStackNavigator({
-    AdminHome: AdminHomeScreen,
-    UserDetail: UserDetailScreen,
-    AcceptApplication: AcceptApplicationScreen,
-    RejectApplicationAndPayment: RejectApplicationAndPaymentScreen,
-    PaymentDetail: PaymentDetailScreen,
-    AdminTransactionHistory: AdminTransactionHistoryScreen
-});
+const AdminNavigator = createStackNavigator(
+    {
+        AdminHome: AdminHomeScreen,
+        UserDetail: UserDetailScreen,
+        AcceptApplication: AcceptApplicationScreen,
+        RejectApplicationAndPayment: RejectApplicationAndPaymentScreen,
+        PaymentDetail: PaymentDetailScreen,
+        AdminTransactionHistory: AdminTransactionHistoryScreen
+    },
+    {
+        headerMode: 'none'
+    }
+);
 
 export default AdminNavigator;
