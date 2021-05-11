@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableNativeFeedback, View } from 'react-native'
 import Header from '../components/Header';
 import Logo from '../assets/logo.svg';
 import color from '../constants/color'
 
 const LoginScreen = () => {
+    const [email, setEmail] = useState('');
+    const [pin, setPIN] = useState('');
+    const formData = new FormData();
+
+    const emailInputHandler = (text) => {
+        setEmail(text);
+    }
+
+    const pinInputHandler = (text) => {
+        setPIN(text);
+    }
+
+    const loginHandler = () => {
+        if (email === '' || pin === '') {
+            alert('Email/PIN belum lengkap');
+        } else {
+            alert(`Email yang anda masukkan : ${email}\nPassword anda : ${pin}`);
+        }
+    }
+
     return (
         <SafeAreaView>
             <Header title="PinjaMAN" />
@@ -13,9 +33,9 @@ const LoginScreen = () => {
                     <View style={styles.container}>
                         <Logo style={styles.logo} />
                         <View style={styles.formContainer}>
-                            <TextInput style={{ ...styles.textInput, marginBottom: 10 }} placeholder="Email" textContentType='emailAddress' keyboardType='email-address' />
-                            <TextInput style={{ ...styles.textInput, marginBottom: 44 }} placeholder="PIN" secureTextEntry keyboardType='number-pad' />
-                            <TouchableNativeFeedback useForeground={true}>
+                            <TextInput style={{ ...styles.textInput, marginBottom: 10 }} placeholder="Email" textContentType='emailAddress' keyboardType='email-address' onChangeText={emailInputHandler} />
+                            <TextInput style={{ ...styles.textInput, marginBottom: 44 }} placeholder="PIN" secureTextEntry keyboardType='number-pad' onChangeText={pinInputHandler} />
+                            <TouchableNativeFeedback useForeground={true} onPress={loginHandler}>
                                 <View style={{ ...styles.button, backgroundColor: '#343434', marginBottom: 12 }}>
                                     <Text style={{ color: 'white' }}>MASUK</Text>
                                 </View>

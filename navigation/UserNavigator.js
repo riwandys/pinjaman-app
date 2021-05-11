@@ -1,5 +1,4 @@
 import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
 import UserHomeScreen from "../screens/UserHomeScreen";
 import LoanApplyScreen from "../screens/LoanApplyScreen";
 import LoanConfirmationScreen from "../screens/LoanConfirmationScreen";
@@ -22,4 +21,4 @@ const UserNavigator = createStackNavigator({
     Setting: SettingScreen
 });
 
-export default createAppContainer(UserNavigator);
+export default UserNavigator;

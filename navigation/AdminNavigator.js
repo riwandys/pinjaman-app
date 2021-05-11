@@ -1,5 +1,4 @@
 import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
 import AdminHomeScreen from '../screens/AdminHomeScreen';
 import UserDetailScreen from '../screens/UserDetailScreen';
 import AcceptApplicationScreen from '../screens/AcceptApplicationScreen';
@@ -16,4 +15,4 @@ const AdminNavigator = createStackNavigator({
     AdminTransactionHistory: AdminTransactionHistoryScreen
 });
 
-export default createAppContainer(AdminNavigator);
+export default AdminNavigator;
