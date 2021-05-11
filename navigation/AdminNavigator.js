@@ -1,5 +1,4 @@
 import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
 import AdminHomeScreen from '../screens/AdminHomeScreen';
 import UserDetailScreen from '../screens/UserDetailScreen';
 import AcceptApplicationScreen from '../screens/AcceptApplicationScreen';
@@ -7,13 +6,18 @@ import RejectApplicationAndPaymentScreen from '../screens/RejectApplicationAndPa
 import PaymentDetailScreen from '../screens/PaymentDetailScreen';
 import AdminTransactionHistoryScreen from '../screens/AdminTransactionHistoryScreen';
 
-const AdminNavigator = createStackNavigator({
-    AdminHome: AdminHomeScreen,
-    UserDetail: UserDetailScreen,
-    AcceptApplication: AcceptApplicationScreen,
-    RejectApplicationAndPayment: RejectApplicationAndPaymentScreen,
-    PaymentDetail: PaymentDetailScreen,
-    AdminTransactionHistory: AdminTransactionHistoryScreen
-});
+const AdminNavigator = createStackNavigator(
+    {
+        AdminHome: AdminHomeScreen,
+        UserDetail: UserDetailScreen,
+        AcceptApplication: AcceptApplicationScreen,
+        RejectApplicationAndPayment: RejectApplicationAndPaymentScreen,
+        PaymentDetail: PaymentDetailScreen,
+        AdminTransactionHistory: AdminTransactionHistoryScreen
+    },
+    {
+        headerMode: 'none'
+    }
+);
 
-export default createAppContainer(AdminNavigator);
+export default AdminNavigator;

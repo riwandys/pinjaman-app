@@ -1,13 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import MasterAdminHomeScreen from './screens/MasterAdminHomeScreen';
-import LoginScreen from './screens/LoginScreen';
+import store from './redux/store';
+import { Provider } from 'react-redux';
+import NavigationContainer from './navigation/NavigationContainer';
+
 
 export default function App() {
   return (
-    <MasterAdminHomeScreen />
-    // <LoginScreen />
+    <Provider store={store}>
+      <NavigationContainer />
+    </Provider>
   );
 }
 
