@@ -9,11 +9,16 @@ export const loginAction = (email, password) => {
             .then(response => {
                 return response.json()
             })
-            .then(response => {
-                dispatch({
-                    type: LOGIN,
-                    data: response.data
-                });
+            .then(responseJSON => {
+                if (responseJSON.message === 'Login failed') {
+                    alert(responseJSON.data.auth_message);
+                } else {
+                    console.log(`${responseJSON.data.email} login pada ${new Date().toString()}`);
+                    dispatch({
+                        type: LOGIN,
+                        data: responseJSON.data
+                    });
+                }
             })
             .catch(err => {
                 console.log(err);

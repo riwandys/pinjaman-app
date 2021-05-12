@@ -4,7 +4,7 @@ import color from '../constants/color'
 
 const BlockButton = (props) => {
     return (
-        <TouchableNativeFeedback useForeground={true}>
+        <TouchableNativeFeedback useForeground={true} onPress={props.onPress}>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>{props.text}</Text>
             </View>

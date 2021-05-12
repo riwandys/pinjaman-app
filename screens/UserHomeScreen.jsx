@@ -1,37 +1,58 @@
-import React from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native'
-import UserDataItems from '../components/UserDataItems'
+import React, { useEffect } from 'react'
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import UserBottomTabs from '../components/UserBottomTabs';
 import BlockButton from '../components/BlockButton';
 import color from '../constants/color';
+import { getUserLimit } from '../redux/actions/user';
+import { currencyFormat } from '../constants/function'
 
-export default function UserHomeScreen() {
+export default function UserHomeScreen(props) {
+    const { email, nik } = useSelector(state => state.auth);
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const dispatch = useDispatch();
+
+    const limit = useSelector(state => state.user.limit);
+
+    useEffect(() => {
+        console.log(`${email} is fetching API`);
+        dispatch(getUserLimit(nik));
+    }, [dispatch])
+
+    const loanButtonPressed = () => {
+        props.navigation.navigate('Admin');
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="rgba(0,0,0,0.1)" translucent />
             <View style={styles.header}>
                 <View>
                     <Text style={styles.headerText}>Halo</Text>
-                    <Text style={styles.headerText}>Nama Pengguna</Text>
+                    <Text style={styles.headerText}>{email}</Text>
                 </View>
                 <View>
-                    <Text style={styles.headerText}>DD/MM/YYYY</Text>
+                    <Text style={styles.headerText}>{`${day}/${month}/${year}`}</Text>
                 </View>
             </View>
             <View style={styles.highlightDataContainer}>
                 <View style={styles.highlightDataBox}>
                     <View style={{ ...styles.highlightData, borderRightWidth: 1, borderColor: color.primary }}>
                         <Text style={styles.dataTitle}>Limit Pinjaman :</Text>
-                        <Text style={styles.dataAmount}>Rp XX.XXX.XXX</Text>
+                        <Text style={styles.dataAmount}>{currencyFormat(limit.limit)}</Text>
                     </View>
                     <View style={styles.highlightData}>
                         <Text style={styles.dataTitle}>Sisa Limit :</Text>
-                        <Text style={styles.dataAmount}>Rp XX.XXX.XXX</Text>
+                        <Text style={styles.dataAmount}>{currencyFormat(limit.limit_remaining)}</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.buttonContainer}>
-                <BlockButton text="Pinjam Sekarang" />
+                <BlockButton text="Pinjam Sekarang" onPress={loanButtonPressed} />
             </View>
             <ScrollView>
                 <View style={styles.viewContainer}>
