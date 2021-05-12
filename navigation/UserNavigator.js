@@ -1,4 +1,4 @@
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator, TransitionPresets } from "react-navigation-stack";
 import UserHomeScreen from "../screens/UserHomeScreen";
 import LoanApplyScreen from "../screens/LoanApplyScreen";
 import LoanConfirmationScreen from "../screens/LoanConfirmationScreen";
@@ -12,7 +12,7 @@ import SettingScreen from '../screens/SettingScreen';
 const UserNavigator = createStackNavigator(
     {
         UserHome: UserHomeScreen,
-        // LoanApply: LoanApplyScreen,
+        LoanApply: LoanApplyScreen,
         // LoanConfirmation: LoanConfirmationScreen,
         // TransactionList: TransactionListScreen,
         // PayBill: PayBillScreen,
@@ -22,8 +22,11 @@ const UserNavigator = createStackNavigator(
         // Setting: SettingScreen
     },
     {
-        headerMode: 'none'
+        headerMode: 'none',
+        defaultNavigationOptions: {
+            ...TransitionPresets.SlideFromRightIOS
+        }
     }
-);
+)
 
 export default UserNavigator;

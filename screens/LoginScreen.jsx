@@ -40,7 +40,7 @@ const LoginScreen = (props) => {
     return (
         <SafeAreaView>
             <Header title="PinjaMAN" />
-            <ScrollView style={styles.scrollContainer}>
+            <ScrollView>
                 <KeyboardAvoidingView behavior='position'>
                     <View style={styles.container}>
                         <Logo style={styles.logo} />

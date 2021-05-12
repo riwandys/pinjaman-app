@@ -1,4 +1,4 @@
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator, TransitionPresets } from "react-navigation-stack";
 import MasterAdminHomeScreen from '../screens/MasterAdminHomeScreen';
 import AddNewAdminScreen from '../screens/AddNewAdminScreen';
 
@@ -8,7 +8,10 @@ const MasterAdminNavigator = createStackNavigator(
         AddNewAdmin: AddNewAdminScreen
     },
     {
-        headerMode: 'none'
+        headerMode: 'none',
+        defaultNavigationOptions: {
+            ...TransitionPresets.SlideFromRightIOS
+        }
     }
 );
 

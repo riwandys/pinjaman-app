@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 
@@ -8,7 +8,10 @@ const AuthNavigator = createStackNavigator(
         // Register: RegisterScreen
     },
     {
-        headerMode: 'none'
+        headerMode: 'none',
+        defaultNavigationOptions: {
+            ...TransitionPresets.SlideFromRightIOS
+        }
     }
 );
 

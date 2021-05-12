@@ -1,4 +1,4 @@
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator, TransitionPresets } from "react-navigation-stack";
 import AdminHomeScreen from '../screens/AdminHomeScreen';
 import UserDetailScreen from '../screens/UserDetailScreen';
 import AcceptApplicationScreen from '../screens/AcceptApplicationScreen';
@@ -16,7 +16,10 @@ const AdminNavigator = createStackNavigator(
         AdminTransactionHistory: AdminTransactionHistoryScreen
     },
     {
-        headerMode: 'none'
+        headerMode: 'none',
+        defaultNavigationOptions: {
+            ...TransitionPresets.SlideFromRightIOS
+        }
     }
 );
 

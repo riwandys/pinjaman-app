@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { createAppContainer, createSwitchNavigator, NavigationActions } from 'react-navigation';
+import { TransitionPresets } from 'react-navigation-stack';
 import StartupScreen from '../screens/StartupScreen';
 import AdminNavigator from './AdminNavigator';
 import AuthNavigator from './AuthNavigator';
@@ -13,6 +14,10 @@ const switchNavigator = createSwitchNavigator({
     User: UserNavigator,
     Admin: AdminNavigator,
     MasterAdmin: MasterAdminNavigator
+}, {
+    defaultNavigationOptions: {
+        ...TransitionPresets.SlideFromRightIOS
+    }
 });
 
 const AppNavigator = createAppContainer(switchNavigator);

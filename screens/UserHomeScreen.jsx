@@ -24,7 +24,7 @@ export default function UserHomeScreen(props) {
     }, [dispatch])
 
     const loanButtonPressed = () => {
-        props.navigation.navigate('Admin');
+        props.navigation.navigate('LoanApply');
     }
 
     return (

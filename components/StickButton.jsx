@@ -14,7 +14,7 @@ const StickButton = (props) => {
     }
 
     return (
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={props.onPress}>
             <View style={{ ...styles.stickButton, backgroundColor }}>
                 <Text style={{ ...styles.buttonText, color: textColor }}>{props.text}</Text>
             </View>
