@@ -1,5 +1,15 @@
-export const LOGIN = 'LOGIN';
 import API from '../../constants/api';
+import { AsyncStorage } from 'react-native'
+export const AUTHENTICATE = 'AUTHENTICATE';
+
+export const authenticate = (email, nik, role) => {
+    return dispatch => {
+        dispatch({
+            type: AUTHENTICATE,
+            data: { email, nik, role }
+        });
+    }
+}
 
 export const loginAction = (email, password) => {
     return (dispatch) => {
@@ -14,15 +24,26 @@ export const loginAction = (email, password) => {
                 if (responseJSON.message === 'Login failed') {
                     alert(responseJSON.data.auth_message);
                 } else {
-                    console.log(`${responseJSON.data.email} login pada ${new Date().toString()}`);
-                    dispatch({
-                        type: LOGIN,
-                        data: responseJSON.data
-                    });
+                    const { email, nik, role } = responseJSON.data;
+                    saveDataToStorage(email, nik, role);
+                    dispatch(authenticate(email, nik, role));
+                    console.log(`Login sucess in ${new Date().toString()}`);
                 }
             })
             .catch(err => {
+                alert('Terjadi error saat login')
                 console.log(err);
             })
     }
 }
+
+const saveDataToStorage = (email, nik, role) => {
+    AsyncStorage.setItem(
+        'userData',
+        JSON.stringify({
+            email,
+            nik,
+            role
+        })
+    );
+};

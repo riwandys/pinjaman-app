@@ -1,4 +1,4 @@
-import { LOGIN } from '../actions/auth'
+import { AUTHENTICATE } from '../actions/auth'
 
 const initialState = {
     nik: null,
@@ -8,8 +8,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN:
-            return action.data;
+        case AUTHENTICATE:
+            return { ...action.data };
         default:
             break;
     }

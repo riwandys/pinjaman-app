@@ -9,6 +9,7 @@ import { currencyFormat } from '../constants/function'
 
 export default function UserHomeScreen(props) {
     const { email, nik } = useSelector(state => state.auth);
+    const auth = useSelector(state => state.auth);
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -20,6 +21,7 @@ export default function UserHomeScreen(props) {
 
     useEffect(() => {
         console.log('Fetching API...');
+        console.log(auth);
         dispatch(getUserLimit(nik));
     }, [dispatch])
 
