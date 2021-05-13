@@ -1,6 +1,7 @@
 import API from '../../constants/api';
 import { AsyncStorage } from 'react-native'
 export const AUTHENTICATE = 'AUTHENTICATE';
+export const LOGOUT = 'LOGOUT';
 
 export const authenticate = (email, nik, role) => {
     return dispatch => {
@@ -35,6 +36,12 @@ export const loginAction = (email, password) => {
                 console.log(err);
             })
     }
+}
+
+export const logout = () => {
+    AsyncStorage.removeItem('userData');
+    console.log('Log out success');
+    return { type: LOGOUT }
 }
 
 const saveDataToStorage = (email, nik, role) => {

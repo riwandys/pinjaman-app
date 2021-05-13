@@ -20,13 +20,15 @@ export default function UserHomeScreen(props) {
     const { limit, limit_remaining } = useSelector(state => state.user.limit);
 
     useEffect(() => {
-        console.log('Fetching API...');
-        console.log(auth);
         dispatch(getUserLimit(nik));
     }, [dispatch])
 
     const loanButtonPressed = () => {
         props.navigation.navigate('LoanApply');
+    }
+
+    const bottomTabNavigate = (target) => {
+        props.navigation.navigate(target);
     }
 
     return (
@@ -87,7 +89,7 @@ export default function UserHomeScreen(props) {
                     </TouchableNativeFeedback>
                 </View>
             </ScrollView>
-            <UserBottomTabs />
+            <UserBottomTabs navigateToAccount={bottomTabNavigate.bind(this, 'Account')} />
         </SafeAreaView>
     );
 }

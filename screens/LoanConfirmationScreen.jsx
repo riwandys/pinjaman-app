@@ -29,7 +29,6 @@ const LoanConfirmationScreen = (props) => {
                 total: loanAmount + adminFee
             }
         }
-        console.log('Fetching API...');
         dispatch(loanMoney(nik, data));
         props.navigation.navigate('UserHome');
     }

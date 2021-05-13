@@ -1,12 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableNativeFeedback } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableNativeFeedback } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/actions/auth';
 import Header from '../components/Header';
 import BackIcon from '../assets/back_icon.svg';
 import UserIcon from '../assets/user_circle.svg';
-import MasterAdminBottomTabs from '../components/MasterAdminBottomTabs';
 import BlockButton from '../components/BlockButton';
 
-const AccountScreen = () => {
+const AccountScreen = (props) => {
+    const dispatch = useDispatch();
+    const logoutHandler = () => {
+        dispatch(logout());
+        props.navigation.navigate('Auth');
+    }
     return (
         <SafeAreaView style={styles.container}>
             <Header title="Akun" leftIcon={BackIcon} />
@@ -32,9 +38,8 @@ const AccountScreen = () => {
                 </View>
             </ScrollView>
             <View style={styles.buttonContainer}>
-                <BlockButton text="Keluar" />
+                <BlockButton text="Keluar" onPress={logoutHandler} />
             </View>
-            <MasterAdminBottomTabs />
         </SafeAreaView >
     )
 }
