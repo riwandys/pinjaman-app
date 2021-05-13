@@ -1,16 +1,20 @@
 import React from 'react'
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../constants/color';
 
 export default function Header(props) {
     const LeftIcon = props.leftIcon || View;
     const RightIcon = props.rightIcon || View;
     return (<>
-        <StatusBar backgroundColor="rgba(0,0,0,0.1)" translucent />
+        <StatusBar backgroundColor="rgba(0,0,0,0.15)" translucent />
         <View style={styles.container}>
-            <LeftIcon width={24} height={24} />
+            <TouchableOpacity onPress={props.onLeftIconPressed}>
+                <LeftIcon width={24} height={24} />
+            </TouchableOpacity>
             <Text style={styles.headerText}>{props.title}</Text>
-            <RightIcon width={24} height={24} />
+            <TouchableOpacity onPress={props.onRightIconPressed}>
+                <RightIcon width={24} height={24} />
+            </TouchableOpacity>
         </View>
     </>
     )

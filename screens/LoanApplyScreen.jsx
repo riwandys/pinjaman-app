@@ -10,12 +10,29 @@ const LoanApplyScreen = (props) => {
     const [deadline, setDeadline] = useState('');
     const deadlineValueChangeHandler = (value, index) => setDeadline(value);
 
-    const navigate = () => {
-        props.navigation.navigate('Account');
+    const [accountNumber, setAccountNumber] = useState('');
+    const [loanAmount, setLoanAmount] = useState(0);
+
+    const navigateToConfirm = () => {
+        if (selectedBank === '' || accountNumber === '' || loanAmount === 0 || deadline === '') {
+            alert('Harap isi form dengan lengkap');
+        } else {
+            props.navigation.navigate('LoanConfirmation', {
+                bank: selectedBank,
+                accountNumber: accountNumber,
+                loanAmount: loanAmount,
+                deadline: deadline
+            });
+        }
     }
+
+    const backIconPressed = () => {
+        props.navigation.goBack();
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Ajukan Pinjaman" leftIcon={BackIcon} />
+            <Header title="Ajukan Pinjaman" leftIcon={BackIcon} onLeftIconPressed={backIconPressed} />
             <ScrollView>
                 <View style={styles.bodyContainer}>
                     <View style={styles.dataSection}>
@@ -31,11 +48,11 @@ const LoanApplyScreen = (props) => {
                             <Picker.Item label="Bank Negara Indonesia (BNI)" value="BNI" />
                             <Picker.Item label="Bank Rakyat Indonesia (BRI)" value="BRI" />
                         </Picker>
-                        <TextInput style={styles.textInput} placeholder="Nomor Rekening Tujuan" keyboardType='number-pad' />
+                        <TextInput style={styles.textInput} onChangeText={(text) => { setAccountNumber(text) }} placeholder="Nomor Rekening Tujuan" keyboardType='number-pad' />
                     </View>
                     <View style={styles.dataSection}>
                         <Text style={styles.sectionTitles}>Data Pinjaman</Text>
-                        <TextInput style={styles.textInput} placeholder="Jumlah dana (tanpa tanda baca)" keyboardType='number-pad' />
+                        <TextInput style={styles.textInput} onChangeText={(text) => { setLoanAmount(text) }} placeholder="Jumlah dana (tanpa tanda baca)" keyboardType='number-pad' />
                         <Picker
                             mode='dropdown'
                             selectedValue={deadline}
@@ -43,15 +60,15 @@ const LoanApplyScreen = (props) => {
                             style={styles.picker}
                         >
                             <Picker.Item label="Tenggat Waktu" value="" />
-                            <Picker.Item label="1 Bulan (Bunga 0%)" value='1' />
-                            <Picker.Item label="3 Bulan (Bunga 5%)" value='3' />
-                            <Picker.Item label="6 Bulan (Bunga 9%)" value='6' />
-                            <Picker.Item label="12 Bulan (Bunga 12%)" value='12' />
+                            <Picker.Item label="1 Bulan (Biaya admin 0%)" value='1' />
+                            <Picker.Item label="3 Bulan (Biaya admin 1%)" value='3' />
+                            <Picker.Item label="6 Bulan (Biaya admin 3%)" value='6' />
+                            <Picker.Item label="12 Bulan (Biaya admin 5%)" value='12' />
                         </Picker>
                     </View>
                 </View>
             </ScrollView>
-            <StickButton text="Lanjut" onPress={navigate} />
+            <StickButton text="Lanjut" onPress={navigateToConfirm} />
         </SafeAreaView >
     )
 }

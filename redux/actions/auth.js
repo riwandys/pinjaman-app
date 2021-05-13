@@ -4,7 +4,8 @@ import API from '../../constants/api';
 export const loginAction = (email, password) => {
     return (dispatch) => {
         fetch(`${API.BASE_URL}/user/login`, {
-            method: 'POST'
+            method: 'POST',
+            body: JSON.stringify({ email, password })
         })
             .then(response => {
                 return response.json()

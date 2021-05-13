@@ -16,10 +16,10 @@ export default function UserHomeScreen(props) {
 
     const dispatch = useDispatch();
 
-    const limit = useSelector(state => state.user.limit);
+    const { limit, limit_remaining } = useSelector(state => state.user.limit);
 
     useEffect(() => {
-        console.log(`${email} is fetching API`);
+        console.log('Fetching API...');
         dispatch(getUserLimit(nik));
     }, [dispatch])
 
@@ -43,11 +43,11 @@ export default function UserHomeScreen(props) {
                 <View style={styles.highlightDataBox}>
                     <View style={{ ...styles.highlightData, borderRightWidth: 1, borderColor: color.primary }}>
                         <Text style={styles.dataTitle}>Limit Pinjaman :</Text>
-                        <Text style={styles.dataAmount}>{currencyFormat(limit.limit)}</Text>
+                        <Text style={styles.dataAmount}>{currencyFormat(limit)}</Text>
                     </View>
                     <View style={styles.highlightData}>
                         <Text style={styles.dataTitle}>Sisa Limit :</Text>
-                        <Text style={styles.dataAmount}>{currencyFormat(limit.limit_remaining)}</Text>
+                        <Text style={styles.dataAmount}>{currencyFormat(limit_remaining)}</Text>
                     </View>
                 </View>
             </View>
