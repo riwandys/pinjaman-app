@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableNativeFeedback, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/actions/auth';
 import Header from '../components/Header';
@@ -9,9 +9,21 @@ import BlockButton from '../components/BlockButton';
 
 const AccountScreen = (props) => {
     const dispatch = useDispatch();
+
+    const logoutAlertOptions = [
+        {
+            text: 'Tidak'
+        }, {
+            text: 'Ya',
+            onPress: () => {
+                dispatch(logout());
+                props.navigation.navigate('Auth');
+            }
+        }
+    ];
+
     const logoutHandler = () => {
-        dispatch(logout());
-        props.navigation.navigate('Auth');
+        Alert.alert('Konfirmasi', 'Apakah anda yakin ingin logout?', logoutAlertOptions, { cancelable: true });
     }
     return (
         <SafeAreaView style={styles.container}>
