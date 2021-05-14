@@ -17,7 +17,7 @@ const UserNavigator = createStackNavigator(
         TransactionList: TransactionListScreen,
         PayBill: PayBillScreen,
         // PaymentConfirmation: PaymentConfirmationScreen,
-        // UserTransactionHistory: UserTransactionHistoryScreen,
+        UserTransactionHistory: UserTransactionHistoryScreen,
         Account: AccountScreen,
         // Setting: SettingScreen
     },
