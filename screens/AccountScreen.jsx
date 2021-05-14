@@ -10,6 +10,10 @@ import BlockButton from '../components/BlockButton';
 const AccountScreen = (props) => {
     const dispatch = useDispatch();
 
+    const backIconPressed = () => {
+        props.navigation.goBack();
+    }
+
     const logoutAlertOptions = [
         {
             text: 'Tidak'
@@ -27,7 +31,7 @@ const AccountScreen = (props) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Akun" leftIcon={BackIcon} />
+            <Header title="Akun" leftIcon={BackIcon} onLeftIconPressed={backIconPressed} />
             <ScrollView>
                 <View style={styles.accountSection}>
                     <UserIcon width={45} height={45} style={styles.userIcon} />

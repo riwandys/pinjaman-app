@@ -89,7 +89,7 @@ export default function UserHomeScreen(props) {
                     </TouchableNativeFeedback>
                 </View>
             </ScrollView>
-            <UserBottomTabs navigateToAccount={bottomTabNavigate.bind(this, 'Account')} />
+            <UserBottomTabs navigateToAccount={bottomTabNavigate.bind(this, 'Account')} navigateToTransaction={bottomTabNavigate.bind(this, 'TransactionList')} />
         </SafeAreaView>
     );
 }

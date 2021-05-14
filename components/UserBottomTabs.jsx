@@ -9,7 +9,7 @@ import { NavigationActions } from 'react-navigation';
 const UserBottomTabs = (props) => {
     return (
         <View style={styles.tabContainer}>
-            <TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={() => { props.navigateToTransaction() }}>
                 <View style={styles.navigationTabItem}>
                     <HistoryIcon width={24} height={28} />
                     <Text style={{ ...styles.navTabLabel, color: '#686868' }}>Transaksi</Text>
