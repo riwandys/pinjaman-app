@@ -1,5 +1,5 @@
 const api = {
-    BASE_URL: 'https://4efb7453f280.ngrok.io/api'
+    BASE_URL: 'https://b5d2905979e6.ngrok.io/api'
 }
 
 export default api;

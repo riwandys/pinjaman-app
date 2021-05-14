@@ -2,9 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../constants/color';
 
-const TransactionListItem = () => {
+const TransactionListItem = (props) => {
     return (
-        <TouchableOpacity activeOpacity={0.4}>
+        <TouchableOpacity activeOpacity={0.4} onPress={props.onPress}>
             <View style={styles.listItemContainer}>
                 <View style={styles.leftContainer}>
                     <View>
