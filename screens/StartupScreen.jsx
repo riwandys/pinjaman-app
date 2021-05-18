@@ -20,8 +20,8 @@ const StartupScreen = props => {
                     return;
                 }
                 const transformedData = JSON.parse(userData);
-                const { email, nik, role } = transformedData;
-                dispatch(authenticate(email, nik, role));
+                const { role } = transformedData;
+                dispatch(authenticate(transformedData));
                 if (role === 'User' || role === 'user') {
                     props.navigation.navigate('User');
                     return;
