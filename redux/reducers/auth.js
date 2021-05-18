@@ -3,7 +3,9 @@ import { AUTHENTICATE, LOGOUT } from '../actions/auth'
 const initialState = {
     nik: null,
     email: null,
-    role: null
+    role: null,
+    name: null,
+    token: null
 };
 
 export default (state = initialState, action) => {

@@ -1,21 +1,30 @@
+import { Alert } from 'react-native';
 import API from '../../constants/api';
 export const GET_LIMIT = 'GET_LIMIT';
 export const LOAN = 'LOAN';
 
-export const getUserLimit = (nik) => {
+export const getUserLimit = (nik, token) => {
     return (dispatch) => {
-        fetch(`${API.BASE_URL}/user/${nik}/limit`)
+        fetch(`${API.BASE_URL}/user/${nik}/limit`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Basic ${token}`
+            }
+        })
             .then(response => {
                 return response.json()
             })
             .then(responseJSON => {
-                dispatch({
-                    type: GET_LIMIT,
-                    data: responseJSON.data
-                });
+                if (responseJSON.data.limit === undefined) {
+                    dispatch({
+                        type: GET_LIMIT,
+                        data: responseJSON.data
+                    });
+                }
             })
             .catch(err => {
                 console.log(err);
+                Alert.alert('Terjadi error')
             })
     }
 }

@@ -8,8 +8,7 @@ import { getUserLimit } from '../redux/actions/user';
 import { currencyFormat } from '../constants/function'
 
 export default function UserHomeScreen(props) {
-    const { email, nik } = useSelector(state => state.auth);
-    const auth = useSelector(state => state.auth);
+    const { email, nik, token, name } = useSelector(state => state.auth);
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -20,7 +19,7 @@ export default function UserHomeScreen(props) {
     const { limit, limit_remaining } = useSelector(state => state.user.limit);
 
     useEffect(() => {
-        dispatch(getUserLimit(nik));
+        dispatch(getUserLimit(nik, token));
     }, [dispatch])
 
     const loanButtonPressed = () => {
@@ -37,7 +36,7 @@ export default function UserHomeScreen(props) {
             <View style={styles.header}>
                 <View>
                     <Text style={styles.headerText}>Halo</Text>
-                    <Text style={styles.headerText}>{email}</Text>
+                    <Text style={styles.headerText}>{name}</Text>
                 </View>
                 <View>
                     <Text style={styles.headerText}>{`${day}/${month}/${year}`}</Text>

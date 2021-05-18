@@ -3,31 +3,33 @@ import { AsyncStorage } from 'react-native'
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 
-export const authenticate = (email, nik, role) => {
+export const authenticate = (data) => {
     return dispatch => {
         dispatch({
             type: AUTHENTICATE,
-            data: { email, nik, role }
+            data: data
         });
     }
 }
 
-export const loginAction = (email, password) => {
+export const loginAction = (email, pin) => {
+    const data = new FormData();
+    data.append('email', email);
+    data.append('pin', pin);
     return (dispatch) => {
         fetch(`${API.BASE_URL}/user/login`, {
             method: 'POST',
-            body: JSON.stringify({ email, password })
+            body: data
         })
             .then(response => {
-                return response.json()
+                return response.json();
             })
             .then(responseJSON => {
                 if (responseJSON.message === 'Login failed') {
                     alert(responseJSON.data.auth_message);
                 } else {
-                    const { email, nik, role } = responseJSON.data;
-                    saveDataToStorage(email, nik, role);
-                    dispatch(authenticate(email, nik, role));
+                    saveDataToStorage(responseJSON.data);
+                    dispatch(authenticate(responseJSON.data));
                     console.log(`Login sucess in ${new Date().toString()}`);
                 }
             })
@@ -44,13 +46,9 @@ export const logout = () => {
     return { type: LOGOUT }
 }
 
-const saveDataToStorage = (email, nik, role) => {
+const saveDataToStorage = (data) => {
     AsyncStorage.setItem(
         'userData',
-        JSON.stringify({
-            email,
-            nik,
-            role
-        })
+        JSON.stringify(data)
     );
 };

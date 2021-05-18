@@ -16,12 +16,10 @@ const LoginScreen = (props) => {
     }
 
     useEffect(() => {
-        if (role === 'User') {
+        if (role === 'User' || role === 'user') {
             props.navigation.navigate('User');
-        } else if (role === 'Admin') {
+        } else if (role === 'Admin' || role === 'admin') {
             props.navigation.navigate('Admin');
-        } else if (role === 'Master Admin') {
-            props.navigation.navigate('MasterAdmin')
         }
     }, [role]);
 

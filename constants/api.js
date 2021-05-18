@@ -1,5 +1,5 @@
 const api = {
-    BASE_URL: 'https://b5d2905979e6.ngrok.io/api'
+    BASE_URL: 'http://4a0e8136277c.ngrok.io/APIpinjaMAN/api'
 }
 
 export default api;
