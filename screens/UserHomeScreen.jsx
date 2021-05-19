@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import UserBottomTabs from '../components/UserBottomTabs';
 import BlockButton from '../components/BlockButton';
@@ -23,7 +23,11 @@ export default function UserHomeScreen(props) {
     }, [dispatch])
 
     const loanButtonPressed = () => {
-        props.navigation.navigate('LoanApply');
+        if (limit === 0) {
+            alert('Limit peminjaman anda 0. Anda tidak dapat melakukan pinjaman untuk saat ini.');
+        } else {
+            props.navigation.navigate('LoanApply');
+        }
     }
 
     const bottomTabNavigate = (target) => {

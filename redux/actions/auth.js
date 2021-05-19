@@ -40,6 +40,31 @@ export const loginAction = (email, pin) => {
     }
 }
 
+export const registerActions = (formData) => {
+    return dispatch => {
+        fetch(`${API.BASE_URL}/user/register`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(responseJSON => {
+                console.log(responseJSON);
+                if (responseJSON.message === 'Register Success' || responseJSON.message === 'Register success') {
+                    alert('Selamat, kamu berhasil mendaftar akun.');
+                    saveDataToStorage(responseJSON.data);
+                    dispatch(authenticate(responseJSON.data));
+                } else {
+                    alert('Registrasi gagal')
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                alert('Registrasi gagal karena terjadi error');
+            });
+    }
+}
+
+
 export const logout = () => {
     AsyncStorage.removeItem('userData');
     console.log('Log out success');

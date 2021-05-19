@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableNativeFeedback, View } from 'react-native'
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableNativeFeedback, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/Header';
 import Logo from '../assets/logo.svg';
@@ -35,6 +35,10 @@ const LoginScreen = (props) => {
         }
     }
 
+    const registerButtonHandler = () => {
+        props.navigation.navigate('Register');
+    }
+
     return (
         <SafeAreaView>
             <Header title="PinjaMAN" />
@@ -50,7 +54,7 @@ const LoginScreen = (props) => {
                                     <Text style={{ color: 'white' }}>MASUK</Text>
                                 </View>
                             </TouchableNativeFeedback>
-                            <TouchableNativeFeedback useForeground={true}>
+                            <TouchableNativeFeedback useForeground={true} onPress={registerButtonHandler}>
                                 <View style={{ ...styles.button, backgroundColor: 'white' }}>
                                     <Text style={{ color: color.primary }}>DAFTAR</Text>
                                 </View>
