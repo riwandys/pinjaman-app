@@ -1,46 +1,86 @@
-import React from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback } from 'react-native'
+import React, { useEffect } from 'react'
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, FlatList, TouchableNativeFeedback } from 'react-native'
 import UserDataItems from '../components/UserDataItems'
 import AdminBottomTabs from '../components/AdminBottomTabs';
 import color from '../constants/color';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPendingTransactions } from '../redux/actions/admin';
 
-export default function AdminHomeScreen() {
+export default function AdminHomeScreen(props) {
+    const dispatch = useDispatch();
+    const { name, role, token, email } = useSelector(state => state.auth);
+    const { pendingUsers, confirmedUsers } = useSelector(state => state.admin.usersCount);
+    const pendingTransactionList = useSelector(state => state.admin.pendingTransactions);
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    useEffect(() => {
+        dispatch(getPendingTransactions(token));
+    }, [dispatch]);
+
+    const pressHandler = (item) => {
+        if (item.type === 'registration') {
+            props.navigation.navigate('UserDetail');
+        } else if (item.type === 'payment') {
+            props.navigation.navigate('PaymentDetail', {
+                transactionID: item.data.transaction_id
+            });
+        }
+    }
+
+
+    const renderItem = ({ item, index }) => {
+        return (
+            <UserDataItems
+                type={item.type}
+                data={item.data}
+                onPress={pressHandler.bind(this, item)}
+            />
+        );
+    }
+
+    const tabNavigate = (target) => {
+        props.navigation.navigate(target);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="rgba(0,0,0,0.1)" translucent />
             <View style={styles.header}>
                 <View>
                     <Text style={styles.headerText}>Halo</Text>
-                    <Text style={styles.headerText}>Admin XX</Text>
+                    <Text style={styles.headerText}>{name}</Text>
                 </View>
                 <View>
-                    <Text style={styles.headerText}>DD/MM/YYYY</Text>
+                    <Text style={styles.headerText}>{`${day}/${month}/${year}`}</Text>
                 </View>
             </View>
             <View style={styles.highlightDataContainer}>
                 <View style={styles.highlightData}>
                     <Text style={styles.dataTitle}>Total Pengguna{'\n'}Menunggu Konfirmasi</Text>
-                    <Text style={styles.dataAmount}>12</Text>
+                    <Text style={styles.dataAmount}>{pendingUsers}</Text>
                 </View>
                 <View style={styles.highlightData}>
                     <Text style={styles.dataTitle}>Total Pengguna{'\n'}Terkonfirmasi</Text>
-                    <Text style={styles.dataAmount}>183</Text>
+                    <Text style={styles.dataAmount}>{confirmedUsers}</Text>
                 </View>
             </View>
-            <ScrollView>
-                <View style={styles.adminListContainer}>
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                    <UserDataItems />
-                </View>
-            </ScrollView>
-            <AdminBottomTabs />
+            <FlatList
+                data={pendingTransactionList}
+                renderItem={renderItem}
+                keyExtractor={(item) => {
+                    if (item.type === 'payment') {
+                        return `${item.type}${item.data.nik}${item.data.payment_deadline}`
+                    } else if (item.type === 'registration') {
+                        return `${item.type}${item.data.nik}${item.data.registration_date}`
+                    }
+
+                }}
+                contentContainerStyle={{ padding: 16 }}
+            />
+            <AdminBottomTabs navigateToAccount={tabNavigate.bind(this, 'Account')} navigateToHistory={tabNavigate.bind(this, 'AdminTransactionHistory')} />
         </SafeAreaView>
     );
 }

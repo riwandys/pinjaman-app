@@ -5,10 +5,10 @@ import UserIcon from '../assets/user_circle.svg';
 import TransactionIcon from '../assets/transaction.svg';
 import color from '../constants/color'
 
-const AdminBottomTabs = () => {
+const AdminBottomTabs = (props) => {
     return (
         <View style={styles.tabContainer}>
-            <TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={() => props.navigateToHistory()}>
                 <View style={styles.navigationTabItem}>
                     <TransactionIcon width={24} height={28} />
                     <Text style={{ ...styles.navTabLabel, color: '#686868' }}>Riwayat</Text>
@@ -20,7 +20,7 @@ const AdminBottomTabs = () => {
                     <Text style={{ ...styles.navTabLabel, color: color.primary }}>Beranda</Text>
                 </View>
             </TouchableNativeFeedback>
-            <TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={() => props.navigateToAccount()}>
                 <View style={styles.navigationTabItem}>
                     <UserIcon width={24} height={28} />
                     <Text style={{ ...styles.navTabLabel, color: '#686868' }}>Akun</Text>

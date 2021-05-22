@@ -4,12 +4,46 @@ import Header from '../components/Header';
 import StickButton from '../components/StickButton';
 import BackIcon from '../assets/back_icon.svg';
 import color from '../constants/color';
+import API from '../constants/api';
+import { useSelector } from 'react-redux';
 
-const RejectApplicationAndPaymentScreen = () => {
-    const [temp, setTemp] = useState(0);
-    const [reason, setReason] = useState(0);
+const RejectPaymentScreen = (props) => {
+    const { token } = useSelector(state => state.auth)
+    const [temp, setTemp] = useState('');
+    const [reason, setReason] = useState('');
     const inputHandler = (input) => {
         setTemp(input);
+    }
+
+    const submitHandler = (data) => {
+        const bodyData = {
+            nik: '',
+            status: 'rejected',
+            reason: reason
+        }
+
+        fetch(`${API.BASE_URL}/transaction/${props.navigation.getParam('transactionID')}/payment`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Basic ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyData)
+        })
+            .then(response => {
+                response.json();
+            })
+            .then(responseJSON => {
+                console.log(responseJSON);
+                if (responseJSON.data.status === 'rejected') {
+                    alert('Pembayaran ditolak');
+                    props.navigation.navigate('AdminHome');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                alert('Terjadi error')
+            })
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -24,13 +58,13 @@ const RejectApplicationAndPaymentScreen = () => {
                 </View>
             </ScrollView>
             <KeyboardAvoidingView behavior='height'>
-                <StickButton text="Tolak Pengajuan" />
+                <StickButton text="Tolak Pengajuan" onPress={submitHandler} />
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }
 
-export default RejectApplicationAndPaymentScreen
+export default RejectPaymentScreen
 
 const styles = StyleSheet.create({
     container: {

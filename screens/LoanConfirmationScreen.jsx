@@ -9,18 +9,20 @@ import { currencyFormat } from '../constants/function';
 import { loanMoney } from '../redux/actions/user';
 
 const LoanConfirmationScreen = (props) => {
-    const { nik } = useSelector(state => state.auth);
+    const { nik, token } = useSelector(state => state.auth);
     const loanAmount = parseInt(props.navigation.getParam('loanAmount'));
     const paymentDeadline = countDeadlineDay(props.navigation.getParam('deadline'));
     const adminFee = countAdminFee(loanAmount, props.navigation.getParam('deadline'));
+    const bank = props.navigation.getParam('bank');
+    const accountNumber = props.navigation.getParam('accountNumber');
 
     const dispatch = useDispatch();
 
     const confirmButtonHandler = () => {
         const data = {
             receiver: {
-                bank: props.navigation.getParam('bank'),
-                account_number: props.navigation.getParam('accountNumber')
+                bank,
+                account_number: accountNumber
             },
             loan: {
                 amount: loanAmount,
@@ -29,7 +31,8 @@ const LoanConfirmationScreen = (props) => {
                 total: loanAmount + adminFee
             }
         }
-        dispatch(loanMoney(nik, data));
+        console.log(data);
+        dispatch(loanMoney(nik, data, token));
         props.navigation.navigate('UserHome');
     }
 

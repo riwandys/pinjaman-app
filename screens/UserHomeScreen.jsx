@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback, Alert } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback, Alert, Image, Linking } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import UserBottomTabs from '../components/UserBottomTabs';
 import BlockButton from '../components/BlockButton';
@@ -23,10 +23,19 @@ export default function UserHomeScreen(props) {
     }, [dispatch])
 
     const loanButtonPressed = () => {
-        if (limit === 0) {
+        if (limit_remaining === 0) {
             alert('Limit peminjaman anda 0. Anda tidak dapat melakukan pinjaman untuk saat ini.');
         } else {
             props.navigation.navigate('LoanApply');
+        }
+    }
+
+    const openURL = async (url) => {
+        const supported = await Linking.canOpenURL(url);
+        if (supported) {
+            await Linking.openURL(url);
+        } else {
+            Alert.alert(`Don't know how to open this URL: ${url}`);
         }
     }
 
@@ -63,33 +72,42 @@ export default function UserHomeScreen(props) {
             </View>
             <ScrollView>
                 <View style={styles.viewContainer}>
-                    <ScrollView horizontal style={styles.scrollContainer} showsHorizontalScrollIndicator={false}>
-                        <TouchableNativeFeedback>
-                            <View style={styles.scrollItem}>
-                                <Text style={styles.centerText}>Cara Meminjam Dana</Text>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>Cara Pakai Aplikasi</Text>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                            <TouchableNativeFeedback onPress={openURL.bind(this, 'https://www.youtube.com/watch?v=_v9FGeXq-xg')}>
+                                <View style={styles.scrollItem}>
+                                    <Image source={require('../assets/banner/cara_pinjam.png')} style={styles.image} />
+                                </View>
+                            </TouchableNativeFeedback>
+                            <TouchableNativeFeedback onPress={openURL.bind(this, 'https://www.youtube.com/watch?v=15P89gaqJTw')}>
+                                <View style={styles.scrollItem}>
+                                    <Image source={require('../assets/banner/kenaikan_limit.png')} style={styles.image} />
+                                </View>
+                            </TouchableNativeFeedback>
+                            <TouchableNativeFeedback onPress={openURL.bind(this, 'https://www.youtube.com/watch?v=4_Qgi6-8KMk')}>
+                                <View style={styles.scrollItem}>
+                                    <Image source={require('../assets/banner/cara_bayar.png')} style={styles.image} />
+                                </View>
+                            </TouchableNativeFeedback>
+                        </ScrollView>
+                    </View>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>Tentang PinjaMAN</Text>
+                        <TouchableNativeFeedback onPress={openURL.bind(this, 'https://www.youtube.com/watch?v=i__fthUw4l0')}>
+                            <View style={styles.contentItem}>
+                                <Image source={require('../assets/banner/promo.png')} style={styles.image} />
                             </View>
                         </TouchableNativeFeedback>
-                        <TouchableNativeFeedback>
-                            <View style={styles.scrollItem}>
-                                <Text style={styles.centerText}>Ajukan Kenaikan Limit</Text>
+                    </View>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>Informasi</Text>
+                        <TouchableNativeFeedback onPress={openURL.bind(this, 'https://www.youtube.com/watch?v=rU0aKdq2oqg')}>
+                            <View style={styles.contentItem}>
+                                <Image source={require('../assets/banner/rekening.png')} style={styles.image} />
                             </View>
                         </TouchableNativeFeedback>
-                        <TouchableNativeFeedback>
-                            <View style={styles.scrollItem}>
-                                <Text style={styles.centerText}>Cara Membayar Pinjaman</Text>
-                            </View>
-                        </TouchableNativeFeedback>
-                    </ScrollView>
-                    <TouchableNativeFeedback>
-                        <View style={styles.contentItem}>
-                            <Text style={styles.centerText}>Cara Membayar Pinjaman</Text>
-                        </View>
-                    </TouchableNativeFeedback>
-                    <TouchableNativeFeedback>
-                        <View style={styles.contentItem}>
-                            <Text style={styles.centerText}>Widget</Text>
-                        </View>
-                    </TouchableNativeFeedback>
+                    </View>
                 </View>
             </ScrollView>
             <UserBottomTabs navigateToAccount={bottomTabNavigate.bind(this, 'Account')} navigateToTransaction={bottomTabNavigate.bind(this, 'TransactionList')} />
@@ -166,36 +184,39 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     viewContainer: {
-        paddingHorizontal: 16
-    },
-    scrollContainer: {
-        paddingHorizontal: 8,
-        marginBottom: 12
+        paddingHorizontal: 16,
+        paddingVertical: 8
     },
     scrollItem: {
-        height: 150,
-        width: 130,
-        padding: 16,
         backgroundColor: 'white',
         elevation: 2,
         borderRadius: 12,
+        overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 4,
-        marginRight: 8,
-        marginLeft: 4
+        marginRight: 12,
     },
     contentItem: {
-        height: 200,
         backgroundColor: 'white',
         borderRadius: 12,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
         borderColor: '#989898',
-        marginBottom: 12
+        overflow: 'hidden'
     },
     centerText: {
         textAlign: 'center'
+    },
+    image: {
+        resizeMode: 'cover'
+    },
+    sectionContainer: {
+        paddingVertical: 4
+    },
+    sectionTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingVertical: 12
     }
 });

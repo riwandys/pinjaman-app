@@ -1,34 +1,41 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../constants/color';
+import { currencyFormat } from '../constants/function';
 
 const TransactionHistoryListItem = (props) => {
+    const getPaymentDate = () => {
+        const [paymentDate] = props.paymentDate.split(' ');
+        const [year, month, date] = paymentDate.split('-');
+        return `${date}/${month}/${year}`;
+    }
+
     return (
         <TouchableOpacity activeOpacity={0.4} onPress={props.onPress}>
             <View style={styles.listItemContainer}>
                 <View style={styles.leftContainer}>
                     <View>
                         <Text style={{ fontSize: 11 }}>Tagihan</Text>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp X.XXX.XXX</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{currencyFormat(props.total)}</Text>
                     </View>
-                    <Text style={{ fontSize: 11 }}>Cicilan X Bulan</Text>
+                    <Text style={{ fontSize: 11 }}>Dibayar</Text>
                 </View>
                 <View style={styles.centerContainer}>
                     <View>
                         <Text style={{ fontSize: 9 }}>ID Transaksi</Text>
-                        <Text style={{ fontSize: 9 }}>XX12345678900</Text>
+                        <Text style={{ fontSize: 9 }}>{props.id}</Text>
                     </View>
                     <View>
                         <Text style={{ fontSize: 9 }}>Penerima</Text>
-                        <Text style={{ fontSize: 9 }}>12345678900(A/N)</Text>
+                        <Text style={{ fontSize: 9 }}>{props.accountNumber} ({props.bank})</Text>
                     </View>
                     <View>
                         <Text style={{ fontSize: 9 }}>Dana diperoleh</Text>
-                        <Text style={{ fontSize: 9 }}>Rp XX.XXX.XXX</Text>
+                        <Text style={{ fontSize: 9 }}>{currencyFormat(props.amount)}</Text>
                     </View>
                     <View>
                         <Text style={{ fontSize: 9 }}>Biaya Admin</Text>
-                        <Text style={{ fontSize: 9 }}>Rp X.XXX.XXX</Text>
+                        <Text style={{ fontSize: 9 }}>{currencyFormat(props.adminFee)}</Text>
                     </View>
                 </View>
                 <View style={styles.rightContainer}>
@@ -36,7 +43,7 @@ const TransactionHistoryListItem = (props) => {
                         <Text style={{ fontSize: 10, textAlign: 'center' }}>Dibayar pada</Text>
                     </View>
                     <View style={{ flexGrow: 50, justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: 'bold' }}>DD/MM/YYYY</Text>
+                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: 'bold' }}>{getPaymentDate()}</Text>
                     </View>
                 </View>
             </View>

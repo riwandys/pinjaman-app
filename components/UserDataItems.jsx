@@ -3,19 +3,22 @@ import { StyleSheet, Text, TouchableNativeFeedback, View, Dimensions } from 'rea
 import ArrowIcon from '../assets/arrow_drop_right.svg';
 import color from '../constants/color'
 
-export default function UserDataItems() {
+export default function UserDataItems(props) {
+    const echo = () => {
+        console.log(props);
+    }
     return (
         <View style={styles.border}>
-            <TouchableNativeFeedback useForeground={true}>
+            <TouchableNativeFeedback useForeground={true} onPress={props.onPress}>
                 <View style={styles.dataContainer} >
                     <View style={styles.itemDataContainer}>
                         <View>
                             <Text style={styles.itemTitle}>ID Pengguna</Text>
-                            <Text style={styles.userIDText}>XX111222333</Text>
+                            <Text style={styles.userIDText}>{props.data.nik}</Text>
                         </View>
                         <View style={styles.itemSmallTextContainer}>
-                            <Text style={styles.itemSmallText}>Keterangan: Pendaftaran</Text>
-                            <Text style={styles.itemSmallText}>DD/MM/YYYY</Text>
+                            <Text style={styles.itemSmallText}>Keterangan: {props.type === 'registration' ? 'Pendaftaran' : 'Pembayaran'}</Text>
+                            <Text style={styles.itemSmallText}>{props.type === 'registration' ? props.data.registration_date : props.data.payment_deadline}</Text>
                         </View>
                     </View>
                     <View style={styles.arrowContainer}>

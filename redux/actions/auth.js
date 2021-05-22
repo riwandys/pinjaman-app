@@ -48,7 +48,6 @@ export const registerActions = (formData) => {
         })
             .then(response => response.json())
             .then(responseJSON => {
-                console.log(responseJSON);
                 if (responseJSON.message === 'Register Success' || responseJSON.message === 'Register success') {
                     alert('Selamat, kamu berhasil mendaftar akun.');
                     saveDataToStorage(responseJSON.data);

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableNativeFeedback, Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/auth';
 import Header from '../components/Header';
 import BackIcon from '../assets/back_icon.svg';
@@ -9,6 +9,8 @@ import BlockButton from '../components/BlockButton';
 
 const AccountScreen = (props) => {
     const dispatch = useDispatch();
+
+    const { name, nik } = useSelector(state => state.auth);
 
     const backIconPressed = () => {
         props.navigation.goBack();
@@ -36,8 +38,8 @@ const AccountScreen = (props) => {
                 <View style={styles.accountSection}>
                     <UserIcon width={45} height={45} style={styles.userIcon} />
                     <View>
-                        <Text style={{ ...styles.accountInfoText, fontWeight: 'bold' }}>MasterAdmin</Text>
-                        <Text style={styles.accountInfoText}>(ID)</Text>
+                        <Text style={{ ...styles.accountInfoText, fontWeight: 'bold' }}>{name}</Text>
+                        <Text style={styles.accountInfoText}>{nik}</Text>
                     </View>
                 </View>
                 <View style={styles.settingSection}>
